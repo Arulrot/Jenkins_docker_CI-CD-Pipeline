@@ -3,12 +3,14 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/Arulrot/Jenkins_sonarqube_docker.git'
+                git branch: 'main', url: 'https://github.com/Arulrot/Jenkins_sonarqube_docker.git'
             }
         }
         stage('Code Analysis') {
             steps {
-                sh 'sonar-scanner -Dsonar.projectKey=portfolio -Dsonar.sources=. -Dsonar.host.url=http://http://13.201.223.126/:9000'
+                withSonarQubeEnv('SonarQube') {
+                    sh 'sonar-scanner -Dsonar.projectKey=portfolio -Dsonar.sources=. -Dsonar.host.url=http://13.201.223.126:9000'
+                }
             }
         }
         stage('Build Docker Image') {
