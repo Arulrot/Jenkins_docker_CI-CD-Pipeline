@@ -2,7 +2,7 @@
 
 This project demonstrates a CI/CD pipeline using Jenkins and Docker to automate the deployment of a static HTML website to an AWS EC2 instance.
 
-## 🚀 Overview
+##  Overview
 
 - **Objective**: Automate the deployment of a static HTML page to an EC2 instance using Docker containers.
 - **Tools Used**: 
@@ -11,7 +11,7 @@ This project demonstrates a CI/CD pipeline using Jenkins and Docker to automate 
   - AWS EC2 (Hosting)
   - GitHub (Source Code Management)
 
-## 📋 Prerequisites
+##  Prerequisites
 
 1. **AWS EC2 Instance**:
    - Ubuntu or Amazon Linux AMI.
@@ -31,7 +31,7 @@ This project demonstrates a CI/CD pipeline using Jenkins and Docker to automate 
 
 ---
 
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone the Repository
 ```bash
