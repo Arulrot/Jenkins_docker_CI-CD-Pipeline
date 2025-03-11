@@ -36,6 +36,8 @@ This project demonstrates a CI/CD pipeline using Jenkins and Docker to automate 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/Arulrot/Jenkins_docker_CI-CD-Pipeline.git
+```
+
 
 ## Setup Instructions
 
