@@ -1,28 +1,36 @@
 pipeline {
     agent any
+
     stages {
-        stage('Clone Repo') {
+        stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Arulrot/Jenkins_sonarqube_docker.git'
+                // Clone the repository and checkout the latest code
+                git branch: 'main', url: 'https://github.com/Arulrot/Jenkins_docker_CI-CD-Pipeline.git'
             }
         }
-        stage('Code Analysis') {
+
+        stage('Build Docker Image') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'sonar-scanner -Dsonar.projectKey=portfolio -Dsonar.sources=. -Dsonar.host.url=http://13.201.223.126:9000'
+                script {
+                    // Build Docker image with index.html
+                    def image = docker.build("webpage:${env.BUILD_ID}", ".")
                 }
             }
         }
-        stage('Build Docker Image') {
+
+        stage('Run Docker Container') {
             steps {
-                sh 'docker build -t portfolio:latest .'
+                script {
+                    // Run Docker container, exposing port 80 for the web server
+                    docker.image("webpage:${env.BUILD_ID}").run('-d -p 8090:80')
+                }
             }
         }
-        stage('Run Container') {
-            steps {
-                sh 'docker stop portfolio || true && docker rm portfolio || true'
-                sh 'docker run -d --name portfolio -p 80:80 portfolio:latest'
-            }
+    }
+
+    post {
+        always {
+            echo 'Pipeline complete!'
         }
     }
 }
